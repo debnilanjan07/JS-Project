@@ -1,20 +1,26 @@
-
-const clock = () => {
+function clock() {
     let time = new Date();
-    let am_pm = "";
+    let amorpm = "";
     let hour = time.getHours();
     let minute = time.getMinutes();
     let second = time.getSeconds();
     let hours = document.getElementsByClassName("hour");
     let minutes = document.getElementsByClassName("minute");
     let seconds = document.getElementsByClassName("second");
-    let am = document.getElementsByClassName("ampm");
-
+    let ampm = document.getElementsByClassName("am_pm");
     if (hour >= 12) {
-        am_pm = "PM";
+        amorpm = "PM";
+
     }
-    if (hour >= 0 && hours < 12) {
-        am_pm = "AM";
+    if (hour >= 0 && hour < 12) {
+        amorpm = "AM";
+
+    }
+    if (hour > 12) {
+        hour = hour - 12;
+    }
+    if (hour == 0) {
+        hour = 12;
     }
     if (hour < 10) {
         hour = "0" + hour;
@@ -25,11 +31,15 @@ const clock = () => {
     if (second < 10) {
         second = "0" + second;
     }
+
+
     hours[0].innerText = hour;
     minutes[0].innerText = minute;
     seconds[0].innerText = second;
-    am[0].innerText = am_pm;
+    ampm[0].innerText = amorpm;
 }
+clock();
+setInterval(clock, 1000);
 
 function setAlarm() {
     let timing = document.getElementsByClassName("timing");
@@ -81,6 +91,3 @@ function setAlarm() {
         greeting.innerText = "GOOD NIGHT!!";
     }
 }
-
-clock();
-setInterval(clock, 1000);
